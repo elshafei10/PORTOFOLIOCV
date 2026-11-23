@@ -34,8 +34,15 @@ a{color:inherit}
 .hero .intro{max-width:52ch;color:var(--muted);font-size:19px}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .photo{aspect-ratio:4/5;border-radius:999px 999px 24px 24px;overflow:hidden;background:var(--soft);display:grid;place-items:center}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
 .photo .initials{font:800 96px var(--display);color:var(--accent)}
+
+/* Strengths */
+.strengths{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px}
+.strength{padding:20px 0;border-top:1px solid var(--line)}
+.strength h3{font:700 20px/1.25 var(--display);color:var(--accent)}
+.strength p{color:var(--muted);margin-top:4px}
+.cv-main li b{font-weight:600}
 
 /* Projects */
 section.block{padding:64px 0;border-top:1px solid var(--line)}
@@ -84,6 +91,7 @@ body.show-cv #cv{display:block}
 @media (max-width:760px){
   .hero{grid-template-columns:1fr;min-height:0;gap:32px}
   .photo{max-width:280px;order:-1}
+  .strengths{grid-template-columns:1fr}
   .project{grid-template-columns:1fr;gap:6px}
   .tags{justify-content:flex-start;margin-top:8px}
   .cv-body{grid-template-columns:1fr}
@@ -109,67 +117,115 @@ body.show-cv #cv{display:block}
      ============================================================ -->
 <script>
 const DATA = {
-  name: "Your Name",
-  role: "Your Job Title",
-  intro: "A short sentence or two about who you are and what you build or design.",
-  photo: "photo.jpg",          // put your photo next to index.html with this name
+  name: "Mohamed Fekri Abdelhamid",
+  role: "Computer Science Student & Web Developer",
+  intro: "Third-year CS student at MSA University. I build websites, lead creative teams, and solve problems fast when events don’t go to plan.",
+  photo: "photo.jpg",          // keep photo.jpg next to index.html
   cvPdf: "",                   // optional: "cv.pdf". Leave empty to print the CV page as PDF instead
 
-  email: "you@example.com",
+  email: "your.email@example.com",
   phone: "+20 000 000 0000",
-  location: "Your City, Country",
+  location: "Cairo, Egypt",
   links: [
-    { label: "LinkedIn", url: "https://linkedin.com/in/yourname" },
-    { label: "GitHub",   url: "https://github.com/yourname" }
+    { label: "TEDx Website", url: "https://tedx-team.vercel.app" },
+    { label: "LinkedIn",     url: "https://linkedin.com/in/your-profile" }
   ],
 
-  summary: "Two or three lines summarising your experience, strengths, and what you are looking for.",
+  summary: "Third-year Computer Science student at MSA University with hands-on experience in web development and event leadership. Started on the MUN organizing committee, was offered Vice Head of Creation at TEDx, and was promoted to Head of Creation after helping run large events. Also led the problem-solving team at every event and helped build the first TEDx team website on free tools for long-term use.",
+
+  // Shown on the home page ("What I bring") and in the CV
+  strengths: [
+    { title: "Problem solving",  text: "Led the problem-solving team at every event, finding quick fixes when plans changed." },
+    { title: "Leadership",       text: "Moved from committee member to Vice Head, then Head of Creation." },
+    { title: "Creative design",  text: "Made decorations for the Verdia and What-If events." },
+    { title: "Web development",  text: "Built the first TEDx team website with free tools so it can run long term at no cost." },
+    { title: "Event organizing", text: "Helped plan and run large events, from preparation to the event day." }
+  ],
 
   experience: [
     {
-      role: "Job Title",
-      company: "Company Name",
-      period: "2023 – Present",
+      role: "Head of Creation",
+      company: "TEDx",
+      period: "",
       points: [
-        "Describe an achievement with a measurable result.",
-        "Describe another responsibility or project you led."
+        "Promoted after organizing large events.",
+        "Led the creative team across event decorations and visuals."
       ]
     },
     {
-      role: "Previous Job Title",
-      company: "Previous Company",
-      period: "2021 – 2023",
+      role: "Problem Solving Team Leader",
+      company: "TEDx events (Verdia, What-If)",
+      period: "",
       points: [
-        "What you did and what changed because of it.",
-        "Tools or methods you used."
+        "Led the problem-solving team at each event once creation work was done.",
+        "Handled issues on the day and kept the event running smoothly."
+      ]
+    },
+    {
+      role: "Vice Head of Creation",
+      company: "TEDx",
+      period: "",
+      points: [
+        "Offered the role after strong performance on the MUN organizing committee.",
+        "Created decorations for Verdia and What-If."
+      ]
+    },
+    {
+      role: "Web Developer (volunteer)",
+      company: "TEDx",
+      period: "",
+      points: [
+        "Helped build the first TEDx team website infrastructure (tedx-team.vercel.app).",
+        "Chose free tools so the site can be maintained long term without cost."
+      ]
+    },
+    {
+      role: "Organizing Committee Member",
+      company: "MUN (academic club)",
+      period: "",
+      points: [
+        "Performed strongly in the organizing committee, which led to the TEDx offer."
       ]
     }
   ],
 
   education: [
-    { degree: "Bachelor’s in Your Field", school: "University Name", period: "2017 – 2021" }
+    {
+      degree: "BSc Computer Science",
+      school: "MSA University",
+      period: "Currently 3rd year",
+      courses: "Database, Data Structures, Multimedia, Web Programming"
+    }
   ],
 
   skills: [
-    { group: "Core",  items: ["Skill one", "Skill two", "Skill three"] },
-    { group: "Tools", items: ["Tool one", "Tool two"] }
+    { group: "Core",       items: ["Problem solving", "Team leadership", "Event organizing", "Creative design"] },
+    { group: "Technical",  items: ["Web programming", "Databases", "Data structures", "Multimedia"] },
+    { group: "Tools",      items: ["Vercel (free hosting)"] }
   ],
 
-  languages: ["Arabic – Native", "English – Fluent"],
+  languages: ["Arabic", "English"],
 
   projects: [
     {
-      title: "Project One",
-      year: "2025",
-      description: "One or two sentences on what it is and what you did.",
-      tags: ["Web", "Design"],
-      url: ""                  // optional link; leave empty for none
+      title: "TEDx Team Website",
+      year: "",
+      description: "The first website infrastructure for the TEDx team, built on free tools so it can be kept running long term.",
+      tags: ["Web", "Vercel"],
+      url: "https://tedx-team.vercel.app"
     },
     {
-      title: "Project Two",
-      year: "2024",
-      description: "Another project. Add as many as you like.",
-      tags: ["App"],
+      title: "Verdia Event Decorations",
+      year: "",
+      description: "Designed and created decorations for the Verdia event, then led the problem-solving team on the day.",
+      tags: ["Design", "Events"],
+      url: ""
+    },
+    {
+      title: "What-If Event Decorations",
+      year: "",
+      description: "Created the decorations for What-If and led problem solving during the event.",
+      tags: ["Design", "Events"],
       url: ""
     }
   ]
@@ -192,6 +248,11 @@ const DATA = {
         </div>
         <div class="photo" id="h-photo"></div>
       </header>
+
+      <section class="block" id="about">
+        <h2>What I bring</h2>
+        <div class="strengths" id="strength-list"></div>
+      </section>
 
       <section class="block" id="projects">
         <h2>Selected work</h2>
@@ -251,6 +312,9 @@ const DATA = {
   $("h-role").textContent = d.role;
   $("h-intro").textContent = d.intro;
 
+  $("strength-list").innerHTML = d.strengths.map(x =>
+    '<div class="strength"><h3>' + esc(x.title) + '</h3><p>' + esc(x.text) + '</p></div>').join("");
+
   $("project-list").innerHTML = d.projects.map(p => {
     const title = p.url ? '<a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.title) + '</a>' : esc(p.title);
     return '<div class="project"><span class="year">' + esc(p.year) + '</span>' +
@@ -276,12 +340,13 @@ const DATA = {
       d.skills.map(g => '<div class="group"><b>' + esc(g.group) + '</b>' + esc(g.items.join(", ")) + '</div>').join("") +
     '</section>' +
     '<section><h4>Education</h4>' +
-      d.education.map(e => '<div class="group"><strong>' + esc(e.degree) + '</strong><br>' + esc(e.school) + '<br><span style="color:var(--muted)">' + esc(e.period) + '</span></div>').join("") +
+      d.education.map(e => '<div class="group"><strong>' + esc(e.degree) + '</strong><br>' + esc(e.school) + '<br><span style="color:var(--muted)">' + esc(e.period) + '</span>' + (e.courses ? '<br><span style="font-size:14px">Courses: ' + esc(e.courses) + '</span>' : '') + '</div>').join("") +
     '</section>' +
     '<section><h4>Languages</h4><ul>' + d.languages.map(l => '<li>' + esc(l) + '</li>').join("") + '</ul></section>';
 
   $("c-main").innerHTML =
     '<section><h4>Profile</h4><p>' + esc(d.summary) + '</p></section>' +
+    '<section><h4>Strengths</h4><ul>' + d.strengths.map(x => '<li><b>' + esc(x.title) + ':</b> ' + esc(x.text) + '</li>').join("") + '</ul></section>' +
     '<section><h4>Experience</h4>' +
       d.experience.map(j =>
         '<div class="job"><div class="top"><strong>' + esc(j.role) + '</strong><span class="when">' + esc(j.period) + '</span></div>' +
