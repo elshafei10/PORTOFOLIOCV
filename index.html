@@ -118,17 +118,15 @@ body.show-cv #cv{display:block}
 <script>
 const DATA = {
   name: "Mohamed Fekri Abdelhamid",
-  role: "Computer Science Student & Web Developer",
+  role: "TEDxMSA University Head of Creation Committee",
   intro: "Third-year CS student at MSA University. I build websites, lead creative teams, and solve problems fast when events don’t go to plan.",
   photo: "photo.jpg",          // keep photo.jpg next to index.html
   cvPdf: "",                   // optional: "cv.pdf". Leave empty to print the CV page as PDF instead
 
-  email: "your.email@example.com",
-  phone: "+20 000 000 0000",
+  phone: "+20 10 94941974",
   location: "Cairo, Egypt",
   links: [
-    { label: "TEDx Website", url: "https://tedx-team.vercel.app" },
-    { label: "LinkedIn",     url: "https://linkedin.com/in/your-profile" }
+    { label: "TEDx Website", url: "https://tedx-team.vercel.app" }
   ],
 
   summary: "Third-year Computer Science student at MSA University with hands-on experience in web development and event leadership. Started on the MUN organizing committee, was offered Vice Head of Creation at TEDx, and was promoted to Head of Creation after helping run large events. Also led the problem-solving team at every event and helped build the first TEDx team website on free tools for long-term use.",
@@ -322,9 +320,9 @@ const DATA = {
       '<div class="tags">' + (p.tags || []).map(t => '<span class="tag">' + esc(t) + '</span>').join("") + '</div></div>';
   }).join("");
 
-  $("f-text").textContent = "Open to new projects and roles. Write to me and I’ll reply soon.";
+  $("f-text").textContent = "Open to new projects and roles. Call or message me anytime.";
   $("f-links").innerHTML =
-    '<a href="mailto:' + esc(d.email) + '">' + esc(d.email) + '</a>' +
+    '<a href="tel:' + esc(d.phone.replace(/\s+/g, "")) + '">' + esc(d.phone) + '</a>' +
     d.links.map(l => '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>').join("");
 
   // CV
@@ -333,7 +331,7 @@ const DATA = {
 
   $("c-side").innerHTML =
     '<section><h4>Contact</h4><ul>' +
-      '<li>' + esc(d.email) + '</li><li>' + esc(d.phone) + '</li><li>' + esc(d.location) + '</li>' +
+      '<li>' + esc(d.phone) + '</li><li>' + esc(d.location) + '</li>' +
       d.links.map(l => '<li>' + esc(l.label) + ': ' + esc(l.url.replace(/^https?:\/\//, "")) + '</li>').join("") +
     '</ul></section>' +
     '<section><h4>Skills</h4>' +
