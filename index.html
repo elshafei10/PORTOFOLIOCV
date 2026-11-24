@@ -44,6 +44,13 @@ a{color:inherit}
 .strength p{color:var(--muted);margin-top:4px}
 .cv-main li b{font-weight:600}
 
+/* Certifications */
+.cert{padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cert h3{font:700 22px/1.25 var(--display)}
+.cert .meta{color:var(--muted);margin:4px 0 14px}
+.cert .actions{margin-top:20px}
+.cert .btn{padding:10px 20px;font-size:15px}
+
 /* Projects */
 section.block{padding:64px 0;border-top:1px solid var(--line)}
 h2{font:700 clamp(28px,4vw,40px)/1.1 var(--display);letter-spacing:-.02em;margin-bottom:32px}
@@ -99,37 +106,13 @@ body.show-cv #cv{display:block}
   .cv-head{padding:28px 24px}.cv-main{padding:28px 24px}
 }
 @media print{
-  @page{size:A4;margin:0}
-  html,body{background:#fff;height:auto}
-  body{font-size:13px;line-height:1.4}
+  body{background:#fff}
   #home,.toolbar{display:none!important}
   #cv{display:block!important;padding:0}
   .wrap{padding:0;max-width:none}
-
-  /* One A4 page, sidebar stretches to the bottom */
-  .sheet{box-shadow:none;border-radius:0;max-width:none;width:210mm;height:296mm;
-         display:flex;flex-direction:column;break-inside:avoid;page-break-after:avoid}
+  .sheet{box-shadow:none;border-radius:0}
   .cv-head,.cv-side{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-
-  /* Force the desktop two-column layout (mobile rules were kicking in) */
-  .cv-body{flex:1;grid-template-columns:210px 1fr}
-  .cv-side{padding:18px;border-right:1px solid var(--line);border-bottom:0;overflow-wrap:anywhere}
-  .cv-main{padding:18px 26px}
-
-  /* Compact sizing */
-  .cv-head{padding:20px 28px;gap:18px}
-  .cv-head .photo{width:76px}
-  .cv-head .photo .initials{font-size:28px}
-  .cv-head h2{font-size:28px}
-  .cv-head p{font-size:15px;margin-top:2px}
-  .cv h4{font-size:14px;margin-bottom:6px}
-  .cv-side section,.cv-main section{margin-bottom:14px}
-  .cv-side p,.cv-side li{font-size:12px}
-  .cv li{margin:1px 0}
-  .group{margin-bottom:8px}
-  .job{margin-bottom:10px;break-inside:avoid}
-  .job strong{font-size:14px}
-  .job .when,.job .org{font-size:12px}
+  .job{break-inside:avoid}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -147,13 +130,12 @@ const DATA = {
   photo: "photo.jpg",          // keep photo.jpg next to index.html
   cvPdf: "",                   // optional: "cv.pdf". Leave empty to print the CV page as PDF instead
 
+  email: "md1856447@gmail.com",
   phone: "+20 10 94941974",
   location: "Cairo, Egypt",
-  links: [
-    { label: "TEDx Website", url: "https://tedx-team.vercel.app" }
-  ],
+  links: [],                   // optional extra links: { label: "GitHub", url: "https://..." }
 
-  summary: "Third-year Computer Science student at MSA University with hands-on experience in web development and event leadership. Started on the MUN organizing committee, was offered Vice Head of Creation at TEDx, and was promoted to Head of Creation after helping run large events. Also led the problem-solving team at every event and helped build the first TEDx team website on free tools for long-term use.",
+  summary: "Third-year Computer Science student at MSA University with hands-on experience in web development and event leadership. Started on the MUN organizing committee, was offered Vice Head of Creation at TEDx, and was promoted to Head of Creation after helping run large events. Also led the problem-solving team at every event and helped build the first TEDx team website on free tools for long-term use. Completed the 144-hour Web Development using .NET course at the Information Technology Institute (ITI).",
 
   // Shown on the home page ("What I bring") and in the CV
   strengths: [
@@ -222,11 +204,28 @@ const DATA = {
 
   skills: [
     { group: "Core",       items: ["Problem solving", "Team leadership", "Event organizing", "Creative design"] },
-    { group: "Technical",  items: ["Web programming", "Databases", "Data structures", "Multimedia"] },
+    { group: "Technical",  items: ["Web programming", "C#", "ASP.NET MVC", "Entity Framework", "SQL Server", "Databases", "Data structures", "Multimedia", "Generative AI & AI agents"] },
     { group: "Tools",      items: ["Vercel (free hosting)"] }
   ],
 
   languages: ["Arabic", "English"],
+
+  certifications: [
+    {
+      title: "Web Development using .NET (144 hrs)",
+      issuer: "Information Technology Institute (ITI)",
+      period: "13 July – 15 August 2026",
+      topics: [
+        "Database Fundamentals using SQL Server",
+        "C# Programming Fundamentals",
+        "Entity Framework",
+        "ASP.NET MVC",
+        "Generative AI, AI Agents & Workflow Automation",
+        "Freelancing Fundamentals"
+      ],
+      image: "certificate.jpg"   // photo of the certificate; leave empty to hide the link
+    }
+  ],
 
   projects: [
     {
@@ -279,6 +278,11 @@ const DATA = {
       <section class="block" id="projects">
         <h2>Selected work</h2>
         <div id="project-list"></div>
+      </section>
+
+      <section class="block" id="certifications">
+        <h2>Certifications</h2>
+        <div id="cert-list"></div>
       </section>
 
       <footer id="contact">
@@ -344,8 +348,16 @@ const DATA = {
       '<div class="tags">' + (p.tags || []).map(t => '<span class="tag">' + esc(t) + '</span>').join("") + '</div></div>';
   }).join("");
 
+  $("cert-list").innerHTML = d.certifications.map(c =>
+    '<div class="cert"><h3>' + esc(c.title) + '</h3>' +
+    '<p class="meta">' + esc(c.issuer) + ' · ' + esc(c.period) + '</p>' +
+    '<div class="tags" style="justify-content:flex-start">' + c.topics.map(t => '<span class="tag">' + esc(t) + '</span>').join("") + '</div>' +
+    (c.image ? '<div class="actions"><a class="btn" href="' + esc(c.image) + '" target="_blank" rel="noopener">View certificate</a></div>' : '') +
+    '</div>').join("");
+
   $("f-text").textContent = "Open to new projects and roles. Call or message me anytime.";
   $("f-links").innerHTML =
+    '<a href="mailto:' + esc(d.email) + '">' + esc(d.email) + '</a>' +
     '<a href="tel:' + esc(d.phone.replace(/\s+/g, "")) + '">' + esc(d.phone) + '</a>' +
     d.links.map(l => '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>').join("");
 
@@ -355,7 +367,7 @@ const DATA = {
 
   $("c-side").innerHTML =
     '<section><h4>Contact</h4><ul>' +
-      '<li>' + esc(d.phone) + '</li><li>' + esc(d.location) + '</li>' +
+      '<li>' + esc(d.email) + '</li><li>' + esc(d.phone) + '</li><li>' + esc(d.location) + '</li>' +
       d.links.map(l => '<li>' + esc(l.label) + ': ' + esc(l.url.replace(/^https?:\/\//, "")) + '</li>').join("") +
     '</ul></section>' +
     '<section><h4>Skills</h4>' +
@@ -374,6 +386,13 @@ const DATA = {
         '<div class="job"><div class="top"><strong>' + esc(j.role) + '</strong><span class="when">' + esc(j.period) + '</span></div>' +
         '<div class="org">' + esc(j.company) + '</div>' +
         '<ul>' + j.points.map(p => '<li>' + esc(p) + '</li>').join("") + '</ul></div>'
+      ).join("") +
+    '</section>' +
+    '<section><h4>Certifications</h4>' +
+      d.certifications.map(c =>
+        '<div class="job"><div class="top"><strong>' + esc(c.title) + '</strong><span class="when">' + esc(c.period) + '</span></div>' +
+        '<div class="org">' + esc(c.issuer) + '</div>' +
+        '<p style="font-size:15px;margin-top:4px">' + esc(c.topics.join(" · ")) + '</p></div>'
       ).join("") +
     '</section>';
 
