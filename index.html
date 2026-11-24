@@ -99,13 +99,37 @@ body.show-cv #cv{display:block}
   .cv-head{padding:28px 24px}.cv-main{padding:28px 24px}
 }
 @media print{
-  body{background:#fff}
+  @page{size:A4;margin:0}
+  html,body{background:#fff;height:auto}
+  body{font-size:13px;line-height:1.4}
   #home,.toolbar{display:none!important}
   #cv{display:block!important;padding:0}
   .wrap{padding:0;max-width:none}
-  .sheet{box-shadow:none;border-radius:0}
+
+  /* One A4 page, sidebar stretches to the bottom */
+  .sheet{box-shadow:none;border-radius:0;max-width:none;width:210mm;height:296mm;
+         display:flex;flex-direction:column;break-inside:avoid;page-break-after:avoid}
   .cv-head,.cv-side{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .job{break-inside:avoid}
+
+  /* Force the desktop two-column layout (mobile rules were kicking in) */
+  .cv-body{flex:1;grid-template-columns:210px 1fr}
+  .cv-side{padding:18px;border-right:1px solid var(--line);border-bottom:0;overflow-wrap:anywhere}
+  .cv-main{padding:18px 26px}
+
+  /* Compact sizing */
+  .cv-head{padding:20px 28px;gap:18px}
+  .cv-head .photo{width:76px}
+  .cv-head .photo .initials{font-size:28px}
+  .cv-head h2{font-size:28px}
+  .cv-head p{font-size:15px;margin-top:2px}
+  .cv h4{font-size:14px;margin-bottom:6px}
+  .cv-side section,.cv-main section{margin-bottom:14px}
+  .cv-side p,.cv-side li{font-size:12px}
+  .cv li{margin:1px 0}
+  .group{margin-bottom:8px}
+  .job{margin-bottom:10px;break-inside:avoid}
+  .job strong{font-size:14px}
+  .job .when,.job .org{font-size:12px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
