@@ -105,14 +105,32 @@ body.show-cv #cv{display:block}
   .cv-side{border-right:0;border-bottom:1px solid var(--line)}
   .cv-head{padding:28px 24px}.cv-main{padding:28px 24px}
 }
+@page{size:A4;margin:0}
 @media print{
-  body{background:#fff}
+  html,body{background:#fff;width:210mm;height:296mm;margin:0;padding:0;overflow:hidden;font-size:13px;line-height:1.4}
   #home,.toolbar{display:none!important}
   #cv{display:block!important;padding:0}
-  .wrap{padding:0;max-width:none}
-  .sheet{box-shadow:none;border-radius:0}
+  .wrap{padding:0;max-width:none;margin:0}
+  /* One A4 page: sheet is exactly one page tall and never spills over */
+  .sheet{box-shadow:none;border-radius:0;max-width:none;width:210mm;height:296mm;overflow:hidden;display:flex;flex-direction:column;break-inside:avoid;page-break-after:avoid}
   .cv-head,.cv-side{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .job{break-inside:avoid}
+  .cv-head{padding:22px 32px;gap:18px;flex:none}
+  .cv-head .photo{width:84px}
+  .cv-head .photo .initials{font-size:30px}
+  .cv-head h2{font-size:28px}
+  .cv-head p{font-size:14px;margin-top:2px}
+  .cv-body{grid-template-columns:215px 1fr;flex:1;min-height:0}
+  .cv-side{padding:20px 20px}
+  .cv-main{padding:20px 28px}
+  .cv h4{font-size:14px;margin-bottom:6px;padding-bottom:3px}
+  .cv-side section,.cv-main section{margin-bottom:16px}
+  .cv-side p,.cv-side li{font-size:12px}
+  .cv li{margin:1px 0;font-size:12.5px}
+  .job{margin-bottom:10px;break-inside:avoid}
+  .job strong{font-size:14px}
+  .job .when,.job .org{font-size:12px}
+  .group{margin-bottom:8px;font-size:12px}
+  .group b{font-size:11px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
