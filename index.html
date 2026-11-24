@@ -125,8 +125,8 @@ body.show-cv #cv{display:block}
 <script>
 const DATA = {
   name: "Mohamed Fekri Abdelhamid",
-  role: "TEDxMSA University Head of Creation Committee",
-  intro: "Third-year CS student at MSA University. I build websites, lead creative teams, and solve problems fast when events don’t go to plan.",
+  role: "TEDxMSA University Head of Creation Committee & Software Engineering",
+  intro: "Third-year CS student at MSA University who builds websites and leads creative teams.",
   photo: "photo.jpg",          // keep photo.jpg next to index.html
   cvPdf: "",                   // optional: "cv.pdf". Leave empty to print the CV page as PDF instead
 
@@ -135,52 +135,48 @@ const DATA = {
   location: "Cairo, Egypt",
   links: [],                   // optional extra links: { label: "GitHub", url: "https://..." }
 
-  summary: "Third-year Computer Science student at MSA University with hands-on experience in web development and event leadership. Started on the MUN organizing committee, was offered Vice Head of Creation at TEDx, and was promoted to Head of Creation after helping run large events. Also led the problem-solving team at every event and helped build the first TEDx team website on free tools for long-term use. Completed the 144-hour Web Development using .NET course at the Information Technology Institute (ITI).",
+  summary: "Computer Science student who combines software development with creative and event leadership.",
 
-  // Shown on the home page ("What I bring") and in the CV
+  // Shown on the home page ("What I bring")
   strengths: [
-    { title: "Problem solving",  text: "Led the problem-solving team at every event, finding quick fixes when plans changed." },
-    { title: "Leadership",       text: "Moved from committee member to Vice Head, then Head of Creation." },
-    { title: "Creative design",  text: "Made decorations for the Verdia and What-If events." },
-    { title: "Web development",  text: "Built the first TEDx team website with free tools so it can run long term at no cost." },
-    { title: "Event organizing", text: "Helped plan and run large events, from preparation to the event day." }
+    { title: "Problem solving",  text: "Quick, calm fixes when plans change." },
+    { title: "Leadership",       text: "Leading and motivating teams under pressure." },
+    { title: "Creative design",  text: "Turning ideas into visuals people remember." },
+    { title: "Web development",  text: "Building simple, low-cost sites that last." },
+    { title: "Event organizing", text: "Running large events from preparation to the day itself." }
   ],
 
   experience: [
     {
       role: "Head of Creation",
-      company: "TEDx",
+      company: "TEDxMSA University",
       period: "",
       points: [
-        "Promoted after organizing large events.",
-        "Led the creative team across event decorations and visuals."
+        "Promoted after organizing large events."
       ]
     },
     {
       role: "Problem Solving Team Leader",
-      company: "TEDx events (Verdia, What-If)",
+      company: "TEDxMSA University events",
       period: "",
       points: [
-        "Led the problem-solving team at each event once creation work was done.",
-        "Handled issues on the day and kept the event running smoothly."
+        "Led the problem-solving team at each event, once creation work was done."
       ]
     },
     {
       role: "Vice Head of Creation",
-      company: "TEDx",
+      company: "TEDxMSA University",
       period: "",
       points: [
-        "Offered the role after strong performance on the MUN organizing committee.",
-        "Created decorations for Verdia and What-If."
+        "Created decorations for the Verdia and What-If events."
       ]
     },
     {
       role: "Web Developer (volunteer)",
-      company: "TEDx",
+      company: "TEDxMSA University",
       period: "",
       points: [
-        "Helped build the first TEDx team website infrastructure (tedx-team.vercel.app).",
-        "Chose free tools so the site can be maintained long term without cost."
+        "Helped build the first team website (tedx-team.vercel.app) using free tools for long-term use."
       ]
     },
     {
@@ -188,7 +184,7 @@ const DATA = {
       company: "MUN (academic club)",
       period: "",
       points: [
-        "Performed strongly in the organizing committee, which led to the TEDx offer."
+        "Strong performance here led to the TEDx offer."
       ]
     }
   ],
@@ -204,8 +200,8 @@ const DATA = {
 
   skills: [
     { group: "Core",       items: ["Problem solving", "Team leadership", "Event organizing", "Creative design"] },
-    { group: "Technical",  items: ["Web programming", "C#", "ASP.NET MVC", "Entity Framework", "SQL Server", "Databases", "Data structures", "Multimedia", "Generative AI & AI agents"] },
-    { group: "Tools",      items: ["Vercel (free hosting)"] }
+    { group: "Technical",  items: ["C#", "ASP.NET MVC", "Entity Framework", "SQL Server", "Generative AI & AI agents"] },
+    { group: "Tools",      items: ["Vercel"] }
   ],
 
   languages: ["Arabic", "English"],
@@ -231,21 +227,14 @@ const DATA = {
     {
       title: "TEDx Team Website",
       year: "",
-      description: "The first website infrastructure for the TEDx team, built on free tools so it can be kept running long term.",
-      tags: ["Web", "Vercel"],
+      description: "The team’s first website, built on free tools so it keeps running at no cost.",
+      tags: ["Web"],
       url: "https://tedx-team.vercel.app"
     },
     {
-      title: "Verdia Event Decorations",
+      title: "Verdia & What-If Decorations",
       year: "",
-      description: "Designed and created decorations for the Verdia event, then led the problem-solving team on the day.",
-      tags: ["Design", "Events"],
-      url: ""
-    },
-    {
-      title: "What-If Event Decorations",
-      year: "",
-      description: "Created the decorations for What-If and led problem solving during the event.",
+      description: "Event decorations for two TEDx events.",
       tags: ["Design", "Events"],
       url: ""
     }
@@ -380,7 +369,6 @@ const DATA = {
 
   $("c-main").innerHTML =
     '<section><h4>Profile</h4><p>' + esc(d.summary) + '</p></section>' +
-    '<section><h4>Strengths</h4><ul>' + d.strengths.map(x => '<li><b>' + esc(x.title) + ':</b> ' + esc(x.text) + '</li>').join("") + '</ul></section>' +
     '<section><h4>Experience</h4>' +
       d.experience.map(j =>
         '<div class="job"><div class="top"><strong>' + esc(j.role) + '</strong><span class="when">' + esc(j.period) + '</span></div>' +
@@ -392,7 +380,7 @@ const DATA = {
       d.certifications.map(c =>
         '<div class="job"><div class="top"><strong>' + esc(c.title) + '</strong><span class="when">' + esc(c.period) + '</span></div>' +
         '<div class="org">' + esc(c.issuer) + '</div>' +
-        '<p style="font-size:15px;margin-top:4px">' + esc(c.topics.join(" · ")) + '</p></div>'
+        '</div>'
       ).join("") +
     '</section>';
 
